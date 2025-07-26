@@ -1,20 +1,20 @@
-# 🏥 Medical Chatbot - Diseño y Flujo Completo
+# 🏥 Medical Chatbot - Complete Design and Flow
 
-## 📋 Resumen del Sistema
+## 📋 System Overview
 
-Este chatbot médico utiliza una arquitectura híbrida que combina:
-- **Botpress API**: Para gestión avanzada de conversaciones
-- **BioClinicalBERT**: NLP especializado en terminología médica
-- **SQLite**: Base de datos para citas y doctores
-- **Estados de conversación**: Manejo inteligente del flujo
+This medical chatbot uses a hybrid architecture that combines:
+- **Botpress API**: For advanced conversation management
+- **BioClinicalBERT**: NLP specialized in medical terminology
+- **SQLite**: Database for appointments and doctors
+- **Conversation states**: Intelligent flow management
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## 🏗️ System Architecture
 
 ```mermaid
 graph TD
-    A[Usuario] --> B[Chatbot Interface]
+    A[User] --> B[Chatbot Interface]
     B --> C[Message Processor]
     C --> D[NLP Pipeline]
     D --> E[BioClinicalBERT + Rule-based]
@@ -41,60 +41,60 @@ graph TD
 
 ---
 
-## 🧠 Pipeline de NLP (Procesamiento de Lenguaje Natural)
+## 🧠 NLP Pipeline (Natural Language Processing)
 
-### 1. **Arquitectura Híbrida del NLP**
+### 1. **Hybrid NLP Architecture**
 
 ```python
 class MedicalNLPPipeline:
     def __init__(self):
-        # Modelo BioClinicalBERT (cuando está disponible)
+        # BioClinicalBERT model (when available)
         self.tokenizer = AutoTokenizer.from_pretrained("emilyalsentzer/Bio_ClinicalBERT")
         
-        # Base de conocimiento médico de respaldo
+        # Backup medical knowledge base
         self.medical_specialties = {
             'cardiology': ['heart', 'cardiac', 'chest pain', 'palpitations'],
             'dermatology': ['skin', 'rash', 'acne', 'eczema'],
             'pediatrics': ['child', 'baby', 'vaccination', 'fever'],
-            # ... más especialidades
+            # ... more specialties
         }
 ```
 
-### 2. **Proceso de Análisis de Texto**
+### 2. **Text Analysis Process**
 
 ```mermaid
 flowchart LR
-    A[Input del Usuario] --> B[Preprocesamiento]
-    B --> C{BioClinicalBERT Disponible?}
+    A[User Input] --> B[Preprocessing]
+    B --> C{BioClinicalBERT Available?}
     
-    C -->|Sí| D[Tokenización BERT]
-    C -->|No| E[Análisis Basado en Reglas]
+    C -->|Yes| D[BERT Tokenization]
+    C -->|No| E[Rule-Based Analysis]
     
-    D --> F[Extracción de Entidades Médicas]
+    D --> F[Medical Entity Extraction]
     E --> F
     
-    F --> G[Clasificación de Intenciones]
-    G --> H[Contexto Médico]
+    F --> G[Intent Classification]
+    G --> H[Medical Context]
     
-    H --> I[Resultado NLP Estructurado]
+    H --> I[Structured NLP Result]
     
     style D fill:#bbdefb
     style E fill:#c8e6c9
     style F fill:#ffcdd2
 ```
 
-### 3. **Extracción de Entidades Médicas**
+### 3. **Medical Entity Extraction**
 
-El sistema identifica automáticamente:
+The system automatically identifies:
 
-| Tipo de Entidad | Ejemplos | Método de Detección |
+| Entity Type | Examples | Detection Method |
 |------------------|----------|---------------------|
-| **Especialidades** | "cardiology", "heart doctor" | Pattern matching + BERT |
-| **Síntomas** | "chest pain", "fever", "rash" | Medical vocabulary |
-| **Urgencia** | "emergency", "urgent", "ASAP" | Keyword detection |
-| **Doctores** | "Dr. Garcia", "Doctor Smith" | Regex patterns |
+| **Specialties** | "cardiology", "heart doctor" | Pattern matching + BERT |
+| **Symptoms** | "chest pain", "fever", "rash" | Medical vocabulary |
+| **Urgency** | "emergency", "urgent", "ASAP" | Keyword detection |
+| **Doctors** | "Dr. Garcia", "Doctor Smith" | Regex patterns |
 
-### 4. **Clasificación de Intenciones**
+### 4. **Intent Classification**
 
 ```python
 intent_patterns = {
@@ -108,9 +108,9 @@ intent_patterns = {
 
 ---
 
-## 🔄 Flujo de Conversación
+## 🔄 Conversation Flow
 
-### 1. **Estados del Chatbot**
+### 1. **Chatbot States**
 
 ```mermaid
 stateDiagram-v2
@@ -130,52 +130,52 @@ stateDiagram-v2
     PROVIDING_INFO --> IDLE : info_provided
 ```
 
-### 2. **Flujo Detallado de Reserva de Citas**
+### 2. **Detailed Appointment Booking Flow**
 
 ```mermaid
 sequenceDiagram
-    participant U as Usuario
+    participant U as User
     participant C as Chatbot
     participant N as NLP Pipeline
     participant D as Database
     
-    U->>C: "Necesito una cita con cardiología"
-    C->>N: Procesar texto
+    U->>C: "I need an appointment with cardiology"
+    C->>N: Process text
     N-->>C: Intent: book_appointment, Entity: cardiology
     
-    C->>D: Obtener doctores de cardiología
-    D-->>C: Lista de doctores disponibles
-    C->>U: "Doctores disponibles: Dr. Garcia, Dr. Martinez"
+    C->>D: Get cardiology doctors
+    D-->>C: List of available doctors
+    C->>U: "Available doctors: Dr. Garcia, Dr. Martinez"
     
     U->>C: "Dr. Garcia"
-    C->>N: Procesar selección
-    N-->>C: Doctor seleccionado: Dr. Garcia
+    C->>N: Process selection
+    N-->>C: Selected doctor: Dr. Garcia
     
-    C->>U: "¿Cuál es su nombre completo?"
-    U->>C: "Juan Pérez"
+    C->>U: "What is your full name?"
+    U->>C: "John Smith"
     
-    C->>U: "¿Cuál es su número de teléfono?"
+    C->>U: "What is your phone number?"
     U->>C: "305-456-7890"
-    C->>C: Validar teléfono
+    C->>C: Validate phone
     
-    C->>D: Obtener horarios disponibles
-    D-->>C: Horarios de Dr. Garcia
-    C->>U: "Horarios: 09:00, 10:00, 11:00, 14:00"
+    C->>D: Get available schedules
+    D-->>C: Dr. Garcia's schedules
+    C->>U: "Times: 09:00, 10:00, 11:00, 14:00"
     
     U->>C: "10:00"
-    C->>D: Reservar cita
-    D-->>C: Cita confirmada (ID: 123)
-    C->>U: "✅ Cita confirmada para Juan Pérez"
+    C->>D: Book appointment
+    D-->>C: Appointment confirmed (ID: 123)
+    C->>U: "✅ Appointment confirmed for John Smith"
 ```
 
 ---
 
-## 🗄️ Estructura de Base de Datos
+## 🗄️ Database Structure
 
-### Esquema de Tablas
+### Table Schema
 
 ```sql
--- Tabla de Doctores
+-- Doctors Table
 CREATE TABLE doctors (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE doctors (
     max_appointments_per_day INTEGER DEFAULT 8
 );
 
--- Tabla de Citas
+-- Appointments Table
 CREATE TABLE appointments (
     id INTEGER PRIMARY KEY,
     patient_name TEXT NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE appointments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de Especialidades
+-- Specialties Table
 CREATE TABLE specialties (
     id INTEGER PRIMARY KEY,
     name TEXT UNIQUE,
@@ -211,29 +211,29 @@ CREATE TABLE specialties (
 
 ---
 
-## 🎯 Gestión de Estados de Conversación
+## 🎯 Conversation State Management
 
-### 1. **Sistema de Estados**
+### 1. **State System**
 
 ```python
 class ConversationStates:
-    IDLE = "idle"                           # Estado inicial
-    COLLECTING_SPECIALTY = "collecting_specialty"    # Pidiendo especialidad
-    COLLECTING_DOCTOR = "collecting_doctor"          # Seleccionando doctor
-    COLLECTING_PATIENT_INFO = "collecting_patient_info"  # Nombre del paciente
-    COLLECTING_PHONE = "collecting_phone"            # Número de teléfono
-    COLLECTING_DATE_TIME = "collecting_date_time"    # Fecha y hora
-    CONFIRMING_APPOINTMENT = "confirming_appointment" # Confirmación final
+    IDLE = "idle"                           # Initial state
+    COLLECTING_SPECIALTY = "collecting_specialty"    # Asking for specialty
+    COLLECTING_DOCTOR = "collecting_doctor"          # Selecting doctor
+    COLLECTING_PATIENT_INFO = "collecting_patient_info"  # Patient name
+    COLLECTING_PHONE = "collecting_phone"            # Phone number
+    COLLECTING_DATE_TIME = "collecting_date_time"    # Date and time
+    CONFIRMING_APPOINTMENT = "confirming_appointment" # Final confirmation
 ```
 
-### 2. **Transiciones de Estado**
+### 2. **State Transitions**
 
 ```mermaid
 graph LR
     A[IDLE] -->|"book appointment"| B[COLLECTING_SPECIALTY]
     B -->|"cardiology"| C[COLLECTING_DOCTOR]
     C -->|"Dr. Garcia"| D[COLLECTING_PATIENT_INFO]
-    D -->|"Juan Pérez"| E[COLLECTING_PHONE]
+    D -->|"John Smith"| E[COLLECTING_PHONE]
     E -->|"305-456-7890"| F[COLLECTING_DATE_TIME]
     F -->|"10:00 AM"| G[CONFIRMING_APPOINTMENT]
     G -->|"yes"| H[APPOINTMENT_BOOKED]
@@ -245,9 +245,9 @@ graph LR
 
 ---
 
-## 🚨 Detección de Emergencias
+## 🚨 Emergency Detection
 
-### Sistema de Alerta Temprana
+### Early Warning System
 
 ```python
 def _is_emergency(self, nlp_result):
@@ -257,7 +257,7 @@ def _is_emergency(self, nlp_result):
         'suicidal', 'overdose', 'poisoning'
     ]
     
-    # Verificación por especialidad
+    # Specialty verification
     specialty_emergencies = {
         'cardiology': ['heart attack', 'chest pain severe', 'cardiac arrest'],
         'neurology': ['stroke', 'severe head injury', 'loss of consciousness'],
@@ -265,16 +265,16 @@ def _is_emergency(self, nlp_result):
     }
 ```
 
-**Flujo de Emergencia:**
+**Emergency Flow:**
 ```mermaid
 flowchart TD
-    A[Mensaje del Usuario] --> B{Contiene palabras de emergencia?}
-    B -->|Sí| C[🚨 PROTOCOLO DE EMERGENCIA]
-    B -->|No| D[Continuar flujo normal]
+    A[User Message] --> B{Contains emergency keywords?}
+    B -->|Yes| C[🚨 EMERGENCY PROTOCOL]
+    B -->|No| D[Continue normal flow]
     
-    C --> E[Mostrar mensaje de emergencia]
-    E --> F[Redirigir a 911 / ER]
-    E --> G[Ofrecer cita regular después]
+    C --> E[Show emergency message]
+    E --> F[Redirect to 911 / ER]
+    E --> G[Offer regular appointment after]
     
     style C fill:#ffebee
     style E fill:#ffcdd2
@@ -282,41 +282,41 @@ flowchart TD
 
 ---
 
-## 📱 Validación de Entrada
+## 📱 Input Validation
 
-### 1. **Validación de Teléfonos**
+### 1. **Phone Number Validation**
 
 ```python
 def _is_phone_number(self, text: str) -> bool:
-    # Eliminar caracteres no numéricos
+    # Remove non-numeric characters
     cleaned = re.sub(r'[^\d]', '', text)
     
-    # Verificar longitud razonable (7-15 dígitos)
+    # Check reasonable length (7-15 digits)
     if len(cleaned) >= 7 and len(cleaned) <= 15:
         return cleaned.isdigit()
     
     return False
 ```
 
-**Formatos Aceptados:**
-- ✅ `3054569878` (10 dígitos)
-- ✅ `305 456 9878` (con espacios)
-- ✅ `305-456-9878` (con guiones)
-- ✅ `+1 305 456 9878` (con código país)
-- ✅ `(305) 456-9878` (formato tradicional)
+**Accepted Formats:**
+- ✅ `3054569878` (10 digits)
+- ✅ `305 456 9878` (with spaces)
+- ✅ `305-456-9878` (with dashes)
+- ✅ `+1 305 456 9878` (with country code)
+- ✅ `(305) 456-9878` (traditional format)
 
-### 2. **Selección Flexible de Doctores**
+### 2. **Flexible Doctor Selection**
 
 ```python
-# Acepta múltiples formatos de respuesta
+# Accepts multiple response formats
 if user_input.lower() in ['yes', 'ok', 'sure', 'first']:
-    # Selecciona el primer doctor sugerido
+    # Select the first suggested doctor
     selected_doctor = doctors[0]['name']
 elif 'Dr.' in user_input:
-    # Nombre específico del doctor
+    # Specific doctor name
     selected_doctor = user_input
 else:
-    # Búsqueda por coincidencia parcial
+    # Search by partial match
     for doctor in doctors:
         if user_input.lower() in doctor['name'].lower():
             selected_doctor = doctor['name']
@@ -324,9 +324,9 @@ else:
 
 ---
 
-## 🔗 Integración con Botpress
+## 🔗 Botpress Integration
 
-### Configuración API
+### API Configuration
 
 ```python
 class BotpressAPI:
@@ -354,28 +354,28 @@ class BotpressAPI:
 
 ---
 
-## 📊 Métricas y Análisis
+## 📊 Metrics and Analysis
 
-### 1. **Indicadores de Rendimiento**
+### 1. **Performance Indicators**
 
-| Métrica | Objetivo | Método de Medición |
+| Metric | Target | Measurement Method |
 |---------|----------|-------------------|
-| **Precisión de NLP** | >85% | Intent + Entity accuracy |
-| **Flujo de Conversación** | >90% | Successful completions |
-| **Detección de Emergencias** | 100% | No false negatives |
-| **Tiempo de Respuesta** | <2s | End-to-end processing |
+| **NLP Accuracy** | >85% | Intent + Entity accuracy |
+| **Conversation Flow** | >90% | Successful completions |
+| **Emergency Detection** | 100% | No false negatives |
+| **Response Time** | <2s | End-to-end processing |
 
-### 2. **Casos de Prueba Automatizados**
+### 2. **Automated Test Cases**
 
 ```python
 test_scenarios = [
     {
-        'name': 'Flujo Completo de Reserva',
+        'name': 'Complete Booking Flow',
         'messages': [
-            "Hola",                           # greeting
-            "Necesito una cita con cardiología",  # book_appointment
+            "Hello",                           # greeting
+            "I need an appointment with cardiology",  # book_appointment
             "Dr. Garcia",                     # doctor_selection
-            "Juan Smith",                     # patient_info
+            "John Smith",                     # patient_info
             "+1-555-123-4567",               # phone_validation
             "10:00"                          # time_selection
         ]
@@ -385,82 +385,82 @@ test_scenarios = [
 
 ---
 
-## 🎯 Casos de Uso Principales
+## 🎯 Main Use Cases
 
-### 1. **Reserva de Cita Médica**
+### 1. **Medical Appointment Booking**
 ```
-Usuario: "Necesito ver un cardiólogo por dolor en el pecho"
-Sistema: 
-- Detecta especialidad: cardiology
-- Detecta síntoma: chest pain
-- Evalúa urgencia: moderate
-- Inicia flujo de reserva
-```
-
-### 2. **Consulta de Información**
-```
-Usuario: "¿Cuáles son sus horarios?"
-Sistema:
-- Clasifica intent: get_info
-- Subclasifica: hours
-- Responde con horarios de la clínica
+User: "I need to see a cardiologist for chest pain"
+System: 
+- Detects specialty: cardiology
+- Detects symptom: chest pain
+- Evaluates urgency: moderate
+- Initiates booking flow
 ```
 
-### 3. **Emergencia Médica**
+### 2. **Information Query**
 ```
-Usuario: "Creo que estoy teniendo un ataque al corazón"
-Sistema:
-- Detecta emergencia: TRUE
-- Activa protocolo de emergencia
-- Redirige a servicios de emergencia
-- Detiene flujo de reserva regular
+User: "What are your hours?"
+System:
+- Classifies intent: get_info
+- Subclassifies: hours
+- Responds with clinic hours
+```
+
+### 3. **Medical Emergency**
+```
+User: "I think I'm having a heart attack"
+System:
+- Detects emergency: TRUE
+- Activates emergency protocol
+- Redirects to emergency services
+- Stops regular booking flow
 ```
 
 ---
 
-## 🔮 Funcionalidades Avanzadas
+## 🔮 Advanced Features
 
-### 1. **Contextualización Médica**
-- Reconoce terminología médica especializada
-- Sugiere especialidades basadas en síntomas
-- Prioriza citas según urgencia detectada
+### 1. **Medical Contextualization**
+- Recognizes specialized medical terminology
+- Suggests specialties based on symptoms
+- Prioritizes appointments based on detected urgency
 
-### 2. **Manejo de Conversación Natural**
-- Acepta variaciones en respuestas del usuario
-- Maneja interrupciones y cambios de tema
-- Proporciona sugerencias contextuales
+### 2. **Natural Conversation Handling**
+- Accepts variations in user responses
+- Handles interruptions and topic changes
+- Provides contextual suggestions
 
-### 3. **Integración Inteligente**
-- Sincronización con sistemas externos via Botpress
-- Logging automático de conversaciones
-- Análisis de patrones de uso
+### 3. **Intelligent Integration**
+- Synchronization with external systems via Botpress
+- Automatic conversation logging
+- Usage pattern analysis
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Technologies Used
 
-| Componente | Tecnología | Propósito |
+| Component | Technology | Purpose |
 |------------|------------|-----------|
-| **NLP Core** | BioClinicalBERT | Comprensión médica avanzada |
-| **Fallback NLP** | Rule-based + Regex | Análisis cuando BERT no está disponible |
-| **Conversation** | State Machine | Gestión de flujo de diálogo |
-| **Database** | SQLite | Persistencia de datos |
-| **Integration** | Botpress API | Conexión con plataformas externas |
-| **Validation** | Custom Python | Validación de entrada de usuario |
+| **NLP Core** | BioClinicalBERT | Advanced medical understanding |
+| **Fallback NLP** | Rule-based + Regex | Analysis when BERT is not available |
+| **Conversation** | State Machine | Dialogue flow management |
+| **Database** | SQLite | Data persistence |
+| **Integration** | Botpress API | Connection to external platforms |
+| **Validation** | Custom Python | User input validation |
 
 ---
 
-## 📈 Resultados de Pruebas
+## 📈 Test Results
 
-### Métricas de Rendimiento Actual:
-- ✅ **Precisión de NLP**: 87.5%
-- ✅ **Flujo de Conversación**: 92.3%
-- ✅ **Detección de Emergencias**: 100%
-- ✅ **Validación de Datos**: 95.8%
-- ✅ **Manejo de Errores**: 89.2%
+### Current Performance Metrics:
+- ✅ **NLP Accuracy**: 87.5%
+- ✅ **Conversation Flow**: 92.3%
+- ✅ **Emergency Detection**: 100%
+- ✅ **Data Validation**: 95.8%
+- ✅ **Error Handling**: 89.2%
 
-### Puntuación General del Sistema: **92.8%** 🌟
+### Overall System Score: **92.8%** 🌟
 
 ---
 
-*Chatbot Médico v1.0 - Arquitectura híbrida con IA médica especializada*
+*Medical Chatbot v1.0 - Hybrid architecture with specialized medical AI*
