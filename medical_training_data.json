@@ -1,0 +1,148 @@
+{
+  "intents": [
+    {
+      "name": "book_appointment",
+      "samples": [
+        {"text": "I want to book an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "I need to schedule an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "I would like to make an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "Can I see a doctor", "intent": "book_appointment", "entities": []},
+        {"text": "Can I meet with a specialist", "intent": "book_appointment", "entities": []},
+        {"text": "Can I visit a physician", "intent": "book_appointment", "entities": []},
+        {"text": "I need to book with cardiology", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "I need to schedule with dermatology", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "dermatology", "text": "dermatology"}]},
+        {"text": "I need to book with pediatrics", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "pediatrics", "text": "pediatrics"}]},
+        {"text": "Book me with a doctor", "intent": "book_appointment", "entities": []},
+        {"text": "Schedule me with a specialist", "intent": "book_appointment", "entities": []},
+        {"text": "I want to see a cardiology doctor", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "I need to see a heart doctor", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "heart doctor"}]},
+        {"text": "I want to see a skin doctor", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "dermatology", "text": "skin doctor"}]},
+        {"text": "Can you help me book an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "Can you help me schedule an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "Can you help me make an appointment", "intent": "book_appointment", "entities": []},
+        {"text": "I'd like to make an appointment for cardiology", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "I'd like to book an appointment for dermatology", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "dermatology", "text": "dermatology"}]},
+        {"text": "Need to see a doctor for chest pain", "intent": "book_appointment", "entities": [{"entity": "condition", "value": "chest pain", "text": "chest pain"}]},
+        {"text": "Need to see a doctor for headache", "intent": "book_appointment", "entities": [{"entity": "condition", "value": "headache", "text": "headache"}]},
+        {"text": "I have chest pain and need to see cardiology ASAP", "intent": "book_appointment", "entities": [{"entity": "condition", "value": "chest pain", "text": "chest pain"}, {"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "I have skin rash and need to see dermatology urgent", "intent": "book_appointment", "entities": [{"entity": "condition", "value": "skin rash", "text": "skin rash"}, {"entity": "specialty", "value": "dermatology", "text": "dermatology"}]},
+        {"text": "Emergency appointment with cardiology please", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "I want to book an appointment today", "intent": "book_appointment", "entities": []},
+        {"text": "I need to schedule an appointment tomorrow", "intent": "book_appointment", "entities": []},
+        {"text": "Can I see Dr. Garcia", "intent": "book_appointment", "entities": [{"entity": "doctor", "value": "Dr. Garcia", "text": "Dr. Garcia"}]},
+        {"text": "I want to book with Dr. Martinez", "intent": "book_appointment", "entities": [{"entity": "doctor", "value": "Dr. Martinez", "text": "Dr. Martinez"}]},
+        {"text": "Schedule me with Dr. Rodriguez for morning", "intent": "book_appointment", "entities": [{"entity": "doctor", "value": "Dr. Rodriguez", "text": "Dr. Rodriguez"}]},
+        {"text": "I need cardiology appointment this week", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "Book pediatrics appointment for Monday", "intent": "book_appointment", "entities": [{"entity": "specialty", "value": "pediatrics", "text": "pediatrics"}]}
+      ]
+    },
+    {
+      "name": "check_appointment",
+      "samples": [
+        {"text": "What appointments do I have", "intent": "check_appointment", "entities": []},
+        {"text": "Check my appointment status", "intent": "check_appointment", "entities": []},
+        {"text": "Check my appointment schedule", "intent": "check_appointment", "entities": []},
+        {"text": "When is my next appointment", "intent": "check_appointment", "entities": []},
+        {"text": "When is my upcoming appointment", "intent": "check_appointment", "entities": []},
+        {"text": "Do I have an appointment with Dr. Garcia", "intent": "check_appointment", "entities": [{"entity": "doctor", "value": "Dr. Garcia", "text": "Dr. Garcia"}]},
+        {"text": "Do I have an appointment with Dr. Martinez", "intent": "check_appointment", "entities": [{"entity": "doctor", "value": "Dr. Martinez", "text": "Dr. Martinez"}]},
+        {"text": "What time is my appointment today", "intent": "check_appointment", "entities": []},
+        {"text": "What time is my appointment tomorrow", "intent": "check_appointment", "entities": []},
+        {"text": "Can you check my appointment", "intent": "check_appointment", "entities": []},
+        {"text": "Can you verify my appointment", "intent": "check_appointment", "entities": []},
+        {"text": "I want to see my appointments", "intent": "check_appointment", "entities": []},
+        {"text": "I want to check my appointments", "intent": "check_appointment", "entities": []},
+        {"text": "I want to review my appointments", "intent": "check_appointment", "entities": []},
+        {"text": "What's my appointment schedule", "intent": "check_appointment", "entities": []},
+        {"text": "Show me my appointments for this week", "intent": "check_appointment", "entities": []},
+        {"text": "Do I have any appointments today", "intent": "check_appointment", "entities": []},
+        {"text": "Check my cardiology appointment", "intent": "check_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "When is my dermatology appointment", "intent": "check_appointment", "entities": [{"entity": "specialty", "value": "dermatology", "text": "dermatology"}]},
+        {"text": "What's my next appointment time", "intent": "check_appointment", "entities": []}
+      ]
+    },
+    {
+      "name": "cancel_appointment",
+      "samples": [
+        {"text": "I need to cancel my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "Cancel my appointment with Dr. Garcia", "intent": "cancel_appointment", "entities": [{"entity": "doctor", "value": "Dr. Garcia", "text": "Dr. Garcia"}]},
+        {"text": "Cancel my appointment with Dr. Martinez", "intent": "cancel_appointment", "entities": [{"entity": "doctor", "value": "Dr. Martinez", "text": "Dr. Martinez"}]},
+        {"text": "I want to cancel my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "I want to reschedule my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "Can I change my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "Can I move my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "Can I reschedule my appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "I can't make my appointment today", "intent": "cancel_appointment", "entities": []},
+        {"text": "I can't make my appointment tomorrow", "intent": "cancel_appointment", "entities": []},
+        {"text": "Need to reschedule my cardiology appointment", "intent": "cancel_appointment", "entities": [{"entity": "specialty", "value": "cardiology", "text": "cardiology"}]},
+        {"text": "Need to reschedule my dermatology appointment", "intent": "cancel_appointment", "entities": [{"entity": "specialty", "value": "dermatology", "text": "dermatology"}]},
+        {"text": "Cancel appointment for today", "intent": "cancel_appointment", "entities": []},
+        {"text": "Cancel appointment for tomorrow", "intent": "cancel_appointment", "entities": []},
+        {"text": "I need to change my appointment time", "intent": "cancel_appointment", "entities": []},
+        {"text": "Reschedule my Monday appointment", "intent": "cancel_appointment", "entities": []},
+        {"text": "Cancel my pediatrics appointment", "intent": "cancel_appointment", "entities": [{"entity": "specialty", "value": "pediatrics", "text": "pediatrics"}]},
+        {"text": "I want to move my appointment to next week", "intent": "cancel_appointment", "entities": []},
+        {"text": "Can I reschedule for afternoon", "intent": "cancel_appointment", "entities": []},
+        {"text": "Need to cancel today's appointment", "intent": "cancel_appointment", "entities": []}
+      ]
+    },
+    {
+      "name": "get_info",
+      "samples": [
+        {"text": "What are your hours", "intent": "get_info", "entities": []},
+        {"text": "What are your operating hours", "intent": "get_info", "entities": []},
+        {"text": "Where is the clinic located", "intent": "get_info", "entities": []},
+        {"text": "Where is the hospital located", "intent": "get_info", "entities": []},
+        {"text": "Where is the office located", "intent": "get_info", "entities": []},
+        {"text": "What's your address", "intent": "get_info", "entities": []},
+        {"text": "What's your location", "intent": "get_info", "entities": []},
+        {"text": "How much does a consultation cost", "intent": "get_info", "entities": []},
+        {"text": "How much does a visit cost", "intent": "get_info", "entities": []},
+        {"text": "Do you accept insurance", "intent": "get_info", "entities": []},
+        {"text": "Do you accept my insurance", "intent": "get_info", "entities": []},
+        {"text": "What specialties do you have", "intent": "get_info", "entities": []},
+        {"text": "What doctors do you have", "intent": "get_info", "entities": []},
+        {"text": "What are your phone numbers", "intent": "get_info", "entities": []},
+        {"text": "How do I get to your office", "intent": "get_info", "entities": []},
+        {"text": "How do I get to your clinic", "intent": "get_info", "entities": []},
+        {"text": "What insurance do you accept", "intent": "get_info", "entities": []},
+        {"text": "Do you have parking", "intent": "get_info", "entities": []},
+        {"text": "What are your weekend hours", "intent": "get_info", "entities": []},
+        {"text": "Are you open on Saturdays", "intent": "get_info", "entities": []}
+      ]
+    }
+  ],
+  "entities": {
+    "specialties": {
+      "values": ["cardiology", "dermatology", "pediatrics", "neurology", "orthopedics", "gynecology", "psychiatry", "internal_medicine"],
+      "synonyms": {
+        "cardiology": ["cardiology", "heart doctor", "cardiologist", "heart specialist"],
+        "dermatology": ["dermatology", "skin doctor", "dermatologist", "skin specialist"],
+        "pediatrics": ["pediatrics", "pediatrician", "children's doctor", "child doctor"],
+        "neurology": ["neurology", "neurologist", "brain doctor", "nerve specialist"],
+        "orthopedics": ["orthopedics", "bone doctor", "orthopedist", "joint specialist"],
+        "gynecology": ["gynecology", "gynecologist", "women's health", "OB-GYN"],
+        "psychiatry": ["psychiatry", "psychiatrist", "mental health", "therapist"],
+        "internal_medicine": ["internal medicine", "general practitioner", "family doctor", "GP"]
+      }
+    },
+    "doctors": {
+      "values": ["Dr. Garcia", "Dr. Martinez", "Dr. Rodriguez", "Dr. Lopez", "Dr. Gonzalez", "Dr. Fernandez", "Dr. Sanchez", "Dr. Ramirez", "Dr. Torres", "Dr. Flores"]
+    },
+    "conditions": {
+      "values": ["chest pain", "headache", "fever", "cough", "back pain", "joint pain", "skin rash", "anxiety", "depression", "high blood pressure", "diabetes", "allergies", "migraine", "insomnia", "fatigue", "dizziness"]
+    },
+    "urgency": {
+      "values": ["urgent", "ASAP", "emergency", "immediately", "soon", "quickly"]
+    },
+    "time_expressions": {
+      "values": ["today", "tomorrow", "this week", "next week", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "morning", "afternoon", "evening"]
+    }
+  },
+  "conversation_patterns": [],
+  "metadata": {
+    "total_samples": 91,
+    "generation_method": "synthetic_with_medical_validation",
+    "specialties_covered": ["cardiology", "dermatology", "pediatrics", "neurology", "orthopedics", "gynecology", "psychiatry", "internal_medicine"]
+  }
+}
